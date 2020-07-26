@@ -1,0 +1,57 @@
+<XML>
+    <Regions>
+        <Region>
+            <Name>eu-north-1</Name>
+            <Domain>localhost</Domain>
+            <Endpoint>
+                <ServiceName>s3</ServiceName>
+                <Http>true</Http>
+                <Https>false</Https>
+                <Hostname>localhost</Hostname>
+            </Endpoint>
+            <Endpoint>
+                <ServiceName>ec2</ServiceName>
+                <Http>true</Http>
+                <Https>false</Https>
+                <Hostname>localhost:7000</Hostname>
+            </Endpoint>
+            <Endpoint>
+                <ServiceName>cloudformation</ServiceName>
+                <Http>true</Http>
+                <Https>false</Https>
+                <Hostname>localhost:7000</Hostname>
+            </Endpoint>
+        </Region>
+        <Region>
+            <Name>us-east-1</Name>
+            <Domain>localhost</Domain>
+            <Endpoint>
+                <ServiceName>cloudformation</ServiceName>
+                <Http>true</Http>
+                <Https>false</Https>
+                <Hostname>localhost</Hostname>
+            </Endpoint>
+        </Region>
+    </Regions>
+    <Services>
+        <Service>
+            <Name>cloudformation</Name>
+            <FullName>asd</FullName>
+            <RegionName>us-east-1</RegionName>
+        </Service>
+        <Service>
+            <Name>ec2</Name>
+            <FullName>asdf ec2</FullName>
+            <RegionName>eu-north-1</RegionName>
+        </Service>
+    <!--
+    </Services>
+    <Services>
+    -->
+        <Service>
+            <Name>s3</Name>
+            <FullName>asdf s3</FullName>
+            <RegionName>eu-north-1</RegionName>
+        </Service>
+    </Services>
+</XML>
