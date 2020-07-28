@@ -7,19 +7,19 @@
                 <ServiceName>s3</ServiceName>
                 <Http>true</Http>
                 <Https>false</Https>
-                <Hostname>localhost</Hostname>
+                <Hostname>localhost:7001</Hostname>
             </Endpoint>
             <Endpoint>
                 <ServiceName>ec2</ServiceName>
                 <Http>true</Http>
                 <Https>false</Https>
-                <Hostname>localhost:7000</Hostname>
+                <Hostname>localhost:7001</Hostname>
             </Endpoint>
             <Endpoint>
                 <ServiceName>cloudformation</ServiceName>
                 <Http>true</Http>
                 <Https>false</Https>
-                <Hostname>localhost:7000</Hostname>
+                <Hostname>localhost:7001</Hostname>
             </Endpoint>
         </Region>
         <Region>

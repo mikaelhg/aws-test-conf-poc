@@ -8,6 +8,11 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.UPPER_CAMEL_CASE
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import mu.KotlinLogging
+import org.eclipse.jetty.server.Connector
+import org.eclipse.jetty.server.Server
+import org.eclipse.jetty.server.ServerConnector
+import org.eclipse.jetty.util.resource.Resource
+import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -15,6 +20,7 @@ import java.time.Instant
 import java.time.temporal.ChronoUnit.HOURS
 import java.time.temporal.ChronoUnit.SECONDS
 import java.util.*
+
 
 /**
  * We need to hook into the JUnit test lifecycle before the Spring context with its
@@ -43,13 +49,13 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 		logger.info { "creating mock AWS metadata service for ${context?.uniqueId}" }
 		initializeServer()
 		System.setProperty(ENDPOINT_OVERRIDE, OVERRIDE_URL)
-		PROPERTIES.forEach { k, v -> System.setProperty(k, v) }
+		PROPERTIES.forEach { (k, v) -> System.setProperty(k, v) }
 	}
 
 	override fun afterAll(context: ExtensionContext?) {
 		logger.info { "shutting down mock AWS metadata service" }
 		System.clearProperty(ENDPOINT_OVERRIDE)
-		PROPERTIES.forEach { k, _ -> System.clearProperty(k) }
+		PROPERTIES.forEach { (k, _) -> System.clearProperty(k) }
 		server.stop()
 	}
 
@@ -66,12 +72,27 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 		}
 		JavalinJackson.configure(om)
 
-		server = Javalin.create().start(7000)
+		server = Javalin.create { config ->
+			config.server {
+				Server().apply {
+					val sslContextFactory = SslContextFactory.Server().apply {
+						keyStoreResource = Resource.newClassPathResource("/keystore")
+						keyStoreType = "JKS"
+						setKeyStorePassword("localhost")
+					}
+					connectors = arrayOf(
+							ServerConnector(server, sslContextFactory).apply { port = 7001 },
+							ServerConnector(server).apply { port = 7000 }
+					)
+				}
+			}
+		}
+		server.start()
 
 		server.before { ctx ->
 			ctx.res.contentType = "text/plain"
 			ctx.res.setHeader("Server", "EC2ws")
-			logger.debug { "before ${ctx.url()}" }
+			logger.debug { "before ${ctx.method()} ${ctx.url()}" }
 		}
 
 		server.after { ctx ->

@@ -5,7 +5,11 @@ import mu.KotlinLogging
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.boot.test.context.SpringBootTest
+import org.testcontainers.containers.GenericContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.utility.DockerImageName
 import poc.act.junit.MockAmazonWebServices
+
 
 @SpringBootTest
 class ApplicationTests {
@@ -17,6 +21,15 @@ class ApplicationTests {
 		@RegisterExtension
 		@JvmField
 		val mockAmazonWebServices = MockAmazonWebServices()
+
+		private val localStackImage = DockerImageName.parse("localstack/localstack:latest")
+
+		@Container
+		@JvmField
+		var localstack = GenericContainer<Nothing>(localStackImage).apply {
+			withExposedPorts(4566)
+			withEnv("LOCALHOST_SERVICES", "ec2,s3,cloudformation")
+		}.start()
 
 	}
 
