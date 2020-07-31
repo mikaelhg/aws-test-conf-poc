@@ -10,7 +10,6 @@ import org.testcontainers.utility.DockerImageName
 import poc.act.container.BetterLocalStackContainer
 import poc.act.junit.MockAmazonWebServices
 
-
 @SpringBootTest
 class ApplicationTests {
 
