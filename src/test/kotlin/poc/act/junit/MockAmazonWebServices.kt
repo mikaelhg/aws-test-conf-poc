@@ -8,11 +8,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy.UPPER_CAMEL_CASE
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import mu.KotlinLogging
-import org.eclipse.jetty.server.Connector
-import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.server.ServerConnector
-import org.eclipse.jetty.util.resource.Resource
-import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -72,21 +67,7 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 		}
 		JavalinJackson.configure(om)
 
-		server = Javalin.create { config ->
-			config.server {
-				Server().apply {
-					val sslContextFactory = SslContextFactory.Server().apply {
-						keyStoreResource = Resource.newClassPathResource("/keystore")
-						keyStoreType = "JKS"
-						setKeyStorePassword("localhost")
-					}
-					connectors = arrayOf(
-							ServerConnector(server, sslContextFactory).apply { port = 7001 },
-							ServerConnector(server).apply { port = 7000 }
-					)
-				}
-			}
-		}
+		server = Javalin.create()
 		server.start()
 
 		server.before { ctx ->
@@ -97,7 +78,7 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 
 		server.after { ctx ->
 			logger.debug { "after" }
-			logger.debug { ctx.resultString() }
+			logger.debug { "response: <${ctx.resultString()}>" }
 		}
 
 		server.get("/latest/meta-data/instance-id") { ctx ->

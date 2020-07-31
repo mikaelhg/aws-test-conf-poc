@@ -31,8 +31,6 @@ dependencies {
 	testImplementation("org.testcontainers:localstack:1.15.0-rc1")
 
 	testImplementation("io.javalin:javalin:3.9.1")
-	testImplementation("org.eclipse.jetty.http2:http2-server:9.4.29.v20200521")
-	testImplementation("org.eclipse.jetty:jetty-alpn-java-server:9.4.29.v20200521")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

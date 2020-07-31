@@ -5,7 +5,6 @@ import mu.KotlinLogging
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.boot.test.context.SpringBootTest
-import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.utility.DockerImageName
 import poc.act.container.BetterLocalStackContainer
@@ -34,7 +33,8 @@ class ApplicationTests {
 	@Test
 	fun contextLoads() {
 		logger.debug { "All the initialization has been done, and the actual test starts." }
-		AmazonEC2ClientBuilder.defaultClient().describeInstances()
+		val instances = AmazonEC2ClientBuilder.defaultClient().describeInstances()
+		logger.debug { "instances: $instances" }
 	}
 
 }
