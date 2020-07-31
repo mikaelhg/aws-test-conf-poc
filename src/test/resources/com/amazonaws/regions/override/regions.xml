@@ -7,19 +7,19 @@
                 <ServiceName>s3</ServiceName>
                 <Http>true</Http>
                 <Https>false</Https>
-                <Hostname>localhost:7001</Hostname>
+                <Hostname>localhost:4566</Hostname>
             </Endpoint>
             <Endpoint>
                 <ServiceName>ec2</ServiceName>
                 <Http>true</Http>
                 <Https>false</Https>
-                <Hostname>localhost:7001</Hostname>
+                <Hostname>localhost:4566</Hostname>
             </Endpoint>
             <Endpoint>
                 <ServiceName>cloudformation</ServiceName>
                 <Http>true</Http>
                 <Https>false</Https>
-                <Hostname>localhost:7001</Hostname>
+                <Hostname>localhost:4566</Hostname>
             </Endpoint>
         </Region>
         <Region>
@@ -36,21 +36,17 @@
     <Services>
         <Service>
             <Name>cloudformation</Name>
-            <FullName>asd</FullName>
+            <FullName>fake service</FullName>
             <RegionName>us-east-1</RegionName>
         </Service>
         <Service>
             <Name>ec2</Name>
-            <FullName>asdf ec2</FullName>
+            <FullName>fake service</FullName>
             <RegionName>eu-north-1</RegionName>
         </Service>
-    <!--
-    </Services>
-    <Services>
-    -->
         <Service>
             <Name>s3</Name>
-            <FullName>asdf s3</FullName>
+            <FullName>fake service</FullName>
             <RegionName>eu-north-1</RegionName>
         </Service>
     </Services>

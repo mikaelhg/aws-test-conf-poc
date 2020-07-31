@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.3.1.RELEASE"
+	id("org.springframework.boot") version "2.3.2.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
 	implementation(platform("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR6"))
-	implementation(platform("com.amazonaws:aws-java-sdk-bom:1.11.827"))
+	implementation(platform("com.amazonaws:aws-java-sdk-bom:1.11.831"))
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

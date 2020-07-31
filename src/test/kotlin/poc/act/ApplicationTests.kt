@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.utility.DockerImageName
+import poc.act.container.BetterLocalStackContainer
 import poc.act.junit.MockAmazonWebServices
 
 
@@ -26,10 +27,7 @@ class ApplicationTests {
 
 		@Container
 		@JvmField
-		var localstack = GenericContainer<Nothing>(localStackImage).apply {
-			withExposedPorts(4566)
-			withEnv("LOCALHOST_SERVICES", "ec2,s3,cloudformation")
-		}.start()
+		val localstack = BetterLocalStackContainer().start()
 
 	}
 
