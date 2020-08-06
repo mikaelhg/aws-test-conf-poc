@@ -2,9 +2,9 @@
 
 So, basically, when you create a Spring Cloud AWS application, and set up your unit
 tests, you'll need to turn off Spring Cloud AWS, and create a custom `@TestConfiguration`
-for your test AWS clients. That's because Spring Cloud AWS hooks into the JUnit 5
-execution cycle and runs its own network requests before any of your application is
-initialized.
+for your test AWS clients. That's because Spring Cloud AWS hooks into the Spring ApplicationContext
+initialization cycle, (which hooks into the JUnit 5 execution cycle) and runs its own network 
+requests before any of your application is initialized.
 
 Or...
 
