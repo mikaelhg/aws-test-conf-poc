@@ -21,8 +21,6 @@ class ApplicationTests {
 		@JvmField
 		val mockAmazonWebServices = MockAmazonWebServices()
 
-		private val localStackImage = DockerImageName.parse("localstack/localstack:latest")
-
 		@Container
 		@JvmField
 		val localstack = BetterLocalStackContainer().start()

@@ -30,7 +30,7 @@ dependencies {
 	testImplementation("org.testcontainers:junit-jupiter:1.17.2")
 	testImplementation("org.testcontainers:localstack:1.17.2")
 
-	testImplementation("io.javalin:javalin:3.9.1")
+	testImplementation("io.javalin:javalin:3.13.13")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

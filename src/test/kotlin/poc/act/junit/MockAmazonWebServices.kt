@@ -5,6 +5,7 @@ import com.amazonaws.util.EC2MetadataUtils
 import com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.UPPER_CAMEL_CASE
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import mu.KotlinLogging
@@ -61,7 +62,7 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 	private fun soon() = Instant.now().plus(12, HOURS).truncatedTo(SECONDS).toString()
 
 	private fun initializeServer() {
-		val om = ObjectMapper().apply {
+		val om = jacksonObjectMapper().apply {
 			propertyNamingStrategy = UPPER_CAMEL_CASE
 			setSerializationInclusion(NON_NULL)
 		}
