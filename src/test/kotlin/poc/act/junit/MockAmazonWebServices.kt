@@ -65,10 +65,10 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 			propertyNamingStrategy = UPPER_CAMEL_CASE
 			setSerializationInclusion(NON_NULL)
 		}
-		JavalinJackson.configure(om)
-
-		server = Javalin.create()
-		server.start()
+		server = Javalin.create { config ->
+			config.jsonMapper(JavalinJackson(om))
+		}
+		server.start(7000)
 
 		server.before { ctx ->
 			ctx.res.contentType = "text/plain"
