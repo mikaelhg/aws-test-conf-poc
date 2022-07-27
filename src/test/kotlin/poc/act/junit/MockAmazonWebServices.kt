@@ -34,6 +34,8 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 				"com.amazonaws.sdk.disableCertChecking" to "true",
 				"aws.region" to "eu-north-1"
 		)
+		const val ACCESS_KEY_ID = "ASIXXXXXXXXXXXXXXXXX"
+		const val SECRET_ACCESS_KEY = "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
 	}
 
 	private val logger = KotlinLogging.logger {}
@@ -129,8 +131,8 @@ class MockAmazonWebServices : BeforeAllCallback, AfterAllCallback {
 				code = "Success"
 				lastUpdated = whileAgo()
 				type = "AWS-HMAC"
-				accessKeyId = "ASIXXXXXXXXXXXXXXXXX"
-				secretAccessKey = "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+				accessKeyId = ACCESS_KEY_ID
+				secretAccessKey = SECRET_ACCESS_KEY
 				token = Base64.getEncoder().encodeToString("X".repeat(796).toByteArray())
 				expiration = soon()
 			}.let { ctx.json(it) }

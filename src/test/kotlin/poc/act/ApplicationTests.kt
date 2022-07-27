@@ -1,7 +1,9 @@
 package poc.act
 
+import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper
 import com.amazonaws.services.ec2.AmazonEC2ClientBuilder
 import mu.KotlinLogging
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.boot.test.context.SpringBootTest
@@ -31,6 +33,13 @@ class ApplicationTests {
 		logger.debug { "All the initialization has been done, and the actual test starts." }
 		val instances = AmazonEC2ClientBuilder.defaultClient().describeInstances()
 		logger.debug { "instances: $instances" }
+	}
+
+	@Test
+	fun `aws library fetches credentials from mock web server`() {
+		val creds = EC2ContainerCredentialsProviderWrapper().credentials
+		Assertions.assertEquals(MockAmazonWebServices.ACCESS_KEY_ID, creds.awsAccessKeyId)
+		Assertions.assertEquals(MockAmazonWebServices.SECRET_ACCESS_KEY, creds.awsSecretKey)
 	}
 
 }
