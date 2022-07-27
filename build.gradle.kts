@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.3.2.RELEASE"
-	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-	kotlin("jvm") version "1.6.20"
-	kotlin("plugin.spring") version "1.6.20"
+	id("org.springframework.boot") version "2.7.2"
+	id("io.spring.dependency-management") version "1.0.12.RELEASE"
+	kotlin("jvm") version "1.7.10"
+	kotlin("plugin.spring") version "1.7.10"
 }
 
 group = "poc"
@@ -16,13 +16,11 @@ repositories {
 }
 
 dependencies {
-	implementation(platform("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR6"))
-	implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.239"))
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.cloud:spring-cloud-starter-aws")
+	implementation("io.awspring.cloud:spring-cloud-starter-aws:2.4.2")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 	implementation("io.github.microutils:kotlin-logging:2.1.23")
@@ -32,14 +30,13 @@ dependencies {
 
 	testImplementation("io.javalin:javalin:3.13.13")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-	}
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks {
-	test {
-		useJUnitPlatform()
+tasks.withType<Test> {
+	useJUnitPlatform()
+	testLogging {
+		events("passed", "skipped", "failed")
 	}
 }
 

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.junit.jupiter.Container
-import org.testcontainers.utility.DockerImageName
 import poc.act.container.BetterLocalStackContainer
 import poc.act.junit.MockAmazonWebServices
 
@@ -28,7 +27,7 @@ class ApplicationTests {
 	}
 
 	@Test
-	fun contextLoads() {
+	fun describeInstancesFromLocalStackWithCredentials() {
 		logger.debug { "All the initialization has been done, and the actual test starts." }
 		val instances = AmazonEC2ClientBuilder.defaultClient().describeInstances()
 		logger.debug { "instances: $instances" }

@@ -3,8 +3,7 @@ package poc.act.junit
 import com.amazonaws.services.ec2.model.UserData
 import com.amazonaws.util.EC2MetadataUtils
 import com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.UPPER_CAMEL_CASE
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.UPPER_CAMEL_CASE
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
