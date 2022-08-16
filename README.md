@@ -1,5 +1,7 @@
 # POC of Spring Cloud AWS testing with mock AWS endpoints
 
+*(Since the origin of this POC, Spring Cloud AWS has developed its bootstrapping to remove the need for this.)*
+
 So, basically, when you create a Spring Cloud AWS application, and set up your unit
 tests, you'll need to turn off Spring Cloud AWS, and create a custom `@TestConfiguration`
 for your test AWS clients. That's because Spring Cloud AWS hooks into the Spring ApplicationContext
